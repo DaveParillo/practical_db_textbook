@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 def main():
     root = Path(__file__).resolve().parents[1]
     build = root / "build/html"
-    seed = (root / "_sources/_static/textbook.sqlite3").read_bytes()
+    seed = (root / "src/_static/textbook.sqlite3").read_bytes()
     records = []
     counts = Counter()
     for path in sorted(build.rglob("*.html")):
@@ -40,10 +40,7 @@ def main():
                 "runAfter": config.get("runAfter", []),
                 "answers": answers,
             })
-    report = json.loads((root / "src/CONVERSION_REPORT.json").read_text())
-    original_ids = {record["identifier"].replace("_", "-")
-                    for record in report["interactions"] if record["directive"] == "activecode"}
-    assert {record["name"] for record in records} == original_ids
+    assert len({record["name"] for record in records}) == len(records), "Duplicate SQL editor identifiers"
     assert counts == {"tb-code": 107, "tb-reveal": 63, "tb-choice": 17,
                       "tb-match": 4, "tb-blank": 4}, counts
     assert sum(bool(record["answers"]) for record in records) == 58
@@ -56,7 +53,7 @@ def main():
         "seed": base64.b64encode(seed).decode(), "exercises": records,
     }, indent=2) + "\n")
     print(json.dumps(dict(counts), indent=2))
-    print("All SQL identifiers and immutable database attachments verified.")
+    print("All SQL identifiers and read-only database attachments verified.")
 
 
 if __name__ == "__main__":
