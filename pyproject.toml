@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "practical-db-textbook"
+version = "0.3.0"
+description = "A Practical Introduction to Databases, built with Sphinx and sphinx-touchbook."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE.txt" }
+authors = [
+    { name = "Christopher Painter-Wakefield" },
+]
+
+[project.optional-dependencies]
+docs = [
+    "Sphinx>=8.1",
+    "sphinx-touchbook>=0.9.0,<0.10",
+    "sphinx-nefertiti>=0.9.11,<1",
+]
+test = [
+    "beautifulsoup4",
+]
+dev = [
+    "tox>=4",
+]
+
+[tool.setuptools]
+py-modules = []
+
