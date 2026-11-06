@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "practical-db-textbook"
-version = "0.3.0"
+version = "0.3.1"
 description = "A Practical Introduction to Databases, built with Sphinx and sphinx-touchbook."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -16,8 +16,11 @@ authors = [
 [project.optional-dependencies]
 docs = [
     "Sphinx>=8.1",
-    "sphinx-touchbook>=0.9.0,<0.10",
-    "sphinx-nefertiti>=0.9.11,<1",
+    "accessible-pygments",
+    "sphinx-accessibility",
+    "sphinx-copybutton",
+    "sphinx-nefertiti",
+    "sphinx-touchbook",
 ]
 test = [
     "beautifulsoup4",

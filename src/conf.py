@@ -26,7 +26,6 @@ Licensed under a
 version = project_version()
 release = version
 language = 'en'
-extensions = ['sphinx.ext.mathjax', 'sphinx_touchbook']
 root_doc = 'index'
 source_suffix = '.rst'
 exclude_patterns = ['**/*.tex',
@@ -36,8 +35,43 @@ exclude_patterns = ['**/*.tex',
                     'appendix-a-datasets/*.sql',
                     'appendix-a-datasets/textbook.sqlite3',
                     'PART4*/*',
-                    'PART5*/*']
+                    'PART5*/*'
+]
+extensions = ['sphinx.ext.mathjax',
+              'sphinx.ext.graphviz',
+              'sphinx.ext.extlinks',
+              'sphinx_accessibility',
+              'sphinx_copybutton',
+              'sphinx_touchbook'
+]
+graphviz_output_format = 'svg'
+extlinks = {
+    'wiki': ('https://en.wikipedia.org/wiki/%s', '%s'),
+    'issue': ('https://github.com/DaveParillo/practical_db_textbook/issues/%s', 'issue %s'),
+}
+
+
 html_theme = 'sphinx_nefertiti'
+html_js_files = [
+  'nefertiti-logo-scheme.js',
+]
+html_theme_options = {
+     'doc_headers_font': 'Nunito',
+     'header_links': [
+         {
+             'text': 'on GitHub',
+             'link': 'https://github.com/DaveParillo/practical_db_textbook',
+         },
+     ],
+     'logo': 'touchbook-logo.svg',
+     'logo_alt': 'Practical DB textbook home',
+     'logo_width': 40,
+     'logo_height': 24,
+     'pygments_light_style': 'a11y-light',
+     'pygments_dark_style': 'a11y-dark',
+     'style_header_neutral': True,
+ }
+
 html_static_path = ['_static']
 highlight_language = 'sql'
 numfig = True
